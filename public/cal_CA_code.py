@@ -16,7 +16,7 @@ def generateCAcode(prn):
         # The g2s vector holds the appropriate shift of the g2 code to generate
         # the C/A code (ex. for SV#19 - use a G2 shift of g2s(19) = 471)
         prn=prn-1
-        assert prn in range(0, 32)
+        assert prn in range(0, 37)
         g2s = [5, 6, 7, 8, 17, 18, 139, 140, 141, 251,
                252, 254, 255, 256, 257, 258, 469, 470, 471, 472,
                473, 474, 509, 512, 513, 514, 515, 516, 859, 860,
