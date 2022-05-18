@@ -1,1 +1,1 @@
-# GNSS-SDR-Toolkit-python
+# GNSS-SDR-toolkit-python
