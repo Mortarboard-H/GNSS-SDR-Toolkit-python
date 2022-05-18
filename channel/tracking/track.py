@@ -212,9 +212,9 @@ class TrackPerMs(Tracking):
         # define the lockdetector to be used
         self.lockdetector=VSMDetector(200,self.accu_time/1e3)
         # define the loop filter of carrier phase to be used. Note that T in transfer funciton refers to the gap between two inputs
-        self.phase_loopfilter=EulerOrder2Direct(15,1,self._accu_time_pre_round/1e3)
+        self.phase_loopfilter=EulerOrder2Direct(5,1,self._accu_time_pre_round/1e3)
         # define the loop filter of code phase to be used
-        self.code_loopfilter=EulerOrder2Direct(15,1,self._accu_time_pre_round/1e3)
+        self.code_loopfilter=EulerOrder2Direct(5,1,self._accu_time_pre_round/1e3)
         
         pass
     
@@ -333,7 +333,7 @@ class TrackPerMs(Tracking):
             cur_code_freq=self.init_code_frequency+NCO_command_dll
 
             # calculate VSM carrier to noise ratio
-            CN0_VSM=self.lockdetector.cal_CN0(Ip,Qp)
+            CN0_VSM=self.lockdetector.cal_CN0(res_mean[0],res_mean[3])
             SNR=self.lockdetector.SNR
 
             if(Ip<0):  

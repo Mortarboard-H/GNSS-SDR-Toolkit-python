@@ -12,7 +12,7 @@ signal_buffer=Queue(maxsize=1e3)
 fileReader=FileSourceThread(1,"filereader","../data/test_signal_bitshift.dat",'c8',signal_buffer)
 init_state=np.array([0,1023e3,0,1e3])
 res_buffer=Queue(1000)
-track_thread=TrackThread(2,"tracker",6e6,signal_buffer,2,1023,init_state,res_buffer,20e3,5)
+track_thread=TrackThread(2,"tracker",6e6,signal_buffer,2,1023,init_state,res_buffer,20e3,7)
 
 fileReader.start()
 track_thread.start()
