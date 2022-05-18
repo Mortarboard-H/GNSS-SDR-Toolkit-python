@@ -9,7 +9,7 @@ from channel.tracking.track_thread import TrackThread
 from public.cal_CA_code import generateCAcode
 
 #generate simple signal
-filename="test_signal_bitshift.dat"
+filename="../data/test_signal_bitshift.dat"
 fid=open(filename,'wb')
 fid.close()
 total_time=30               #30s
@@ -25,11 +25,11 @@ for i in range(total_time): #s
     for j in range(0,int(1e3)):  #ms
         if(j%20==0):
             databit=databit*-1
-        cur_carrier_phase=np.linspace(0,1e-3,sample_rate/1e3,False)
+        cur_carrier_phase=np.linspace(0,1e-3,int(sample_rate/1e3),False)
         cur_carrier_phase=cur_carrier_phase*2*pi*carrier_freq
         cur_carrier_phase=cur_carrier_phase%(2*pi)
 
-        cur_code_phase=np.linspace(0,1023,sample_rate/1e3,False)
+        cur_code_phase=np.linspace(0,1023,int(sample_rate/1e3),False)
         cur_chip_index=np.floor(cur_code_phase).astype('i4')
         cur_code=code[cur_chip_index]
         cur_sig=np.exp(1j*cur_carrier_phase)

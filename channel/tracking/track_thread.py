@@ -10,7 +10,7 @@ class TrackThread(Thread):
                 prn:int,                        #prn of the signal
                 code_len:int,                   #length of CA code
                 init_state:np.array,            #the initial code phase & frequency, carrier phase & frequency
-                res_buffer:Queue,               #to store the result of tracking, incluing Ip Ie Il, Qp Qe Ql, CN0
+                res_buffer:Queue,               #to store the result of tracking, incluing Ip Ie Il, Qp Qe Ql, code phase, code freq, carrier phase, carrier freq, 3 CN0, 1 SNR
                 ms_to_process=1e10,             #length to process
                 accu_time_ms=1                    #accumulation period, round of code
                 ):

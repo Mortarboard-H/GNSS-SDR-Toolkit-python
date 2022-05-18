@@ -44,7 +44,7 @@ class Tracking:
         self.init_carrier_frequency=initstate[3]
         self.code=generateCAcode(prn)
         self.res_buffer=res_buffer
-        self.final_res = np.zeros(13,)                            # The final result to be transferred. 
+        self.final_res = np.zeros(14,)                            # The final result to be transferred. 
                                                                     # Index 0-5 are for Ip, Ie, Il, Qp, Qe, Ql, 
                                                                     # Index 6-9 are for code phase, code frequency, carrier phase, carrier frequency
                                                                     # Index 10-12 are for carrier to noise ratio
@@ -75,9 +75,9 @@ class Trackor(Tracking):
         super().__init__(sampRate,sourcebuffer,prn,codelen,initstate,res_buffer,ms_to_process,accu_time_ms)
         self.synchronizer=DirectSynchronizer(self.init_code_phase,self.init_code_frequency,self.init_carrier_phase,self.init_carrier_frequency,self.sample_rate,self.code_length,self.code)
         self.discriminator=ArctanCarrierEMLACode()
-        self.lockdetector=VSMDetector(200,self.accu_time)
-        self.phase_loopfilter=EulerOrder2Direct(5,1,self.accu_time)
-        self.code_loopfilter=EulerOrder2Direct(5,1,self.accu_time)
+        self.lockdetector=VSMDetector(200,self.accu_time/1e3)
+        self.phase_loopfilter=EulerOrder2Direct(5,1,self.accu_time/1e3)
+        self.code_loopfilter=EulerOrder2Direct(5,1,self.accu_time/1e3)
         pass
 
     def tracking_process(self):
@@ -167,10 +167,13 @@ class Trackor(Tracking):
             cur_code_freq=self.init_code_frequency+NCO_command_dll
 
             CN0_VSM=self.lockdetector.cal_CN0(Ip,Qp)
+            SNR=self.lockdetector.SNR
 
             self.final_res[0:6]=[Ip,Ie,Il,Qp,Qe,Ql]
             self.final_res[6:10]=[cur_code_phase,cur_code_freq,cur_carrier_phase,cur_carrier_freq]
             self.final_res[10]=CN0_VSM
+            self.final_res[13]=SNR
+            
 
             self.res_buffer.put(self.final_res.copy())
         
@@ -201,17 +204,17 @@ class TrackPerMs(Tracking):
         super().__init__(sampRate,sourcebuffer,prn,codelen,initstate,res_buffer,ms_to_process,accu_time_ms)
         self.__track_loop_times=int(self.accu_time)               # The round of 1 ms loop needed to meet the requirement of accumulation time
         self.__track_results = np.zeros([self.__track_loop_times,6])   # The container stores the direct tracking results of early rounds
-        self._accu_time_pre_round=0.001
+        self._accu_time_pre_round=1         #1 ms
         # define the sychronizer to be used
         self.synchronizer=DirectSynchronizer(self.init_code_phase,self.init_code_frequency,self.init_carrier_phase,self.init_carrier_frequency,self.sample_rate,self.code_length,self.code)
         # define the discriminator to be used 
         self.discriminator=ArctanCarrierEMLACode()
         # define the lockdetector to be used
-        self.lockdetector=VSMDetector(200,self.accu_time)
+        self.lockdetector=VSMDetector(200,self.accu_time/1e3)
         # define the loop filter of carrier phase to be used. Note that T in transfer funciton refers to the gap between two inputs
-        self.phase_loopfilter=EulerOrder2Direct(5,1,self._accu_time_pre_round)
+        self.phase_loopfilter=EulerOrder2Direct(15,1,self._accu_time_pre_round/1e3)
         # define the loop filter of code phase to be used
-        self.code_loopfilter=EulerOrder2Direct(5,1,self._accu_time_pre_round)
+        self.code_loopfilter=EulerOrder2Direct(15,1,self._accu_time_pre_round/1e3)
         
         pass
     
@@ -315,7 +318,7 @@ class TrackPerMs(Tracking):
             self.__track_results[0]=res_round
 
             # calculate mean tracking results
-            res_mean=np.mean(self.__track_results,0)
+            res_mean=np.sum(self.__track_results,0)
             
             #calculate code phase error and carrier phase error
             code_phase_error=self.discriminator.discriminator_dll(res_mean[0],res_mean[1],res_mean[2],res_mean[3],res_mean[4],res_mean[5])
@@ -339,7 +342,7 @@ class TrackPerMs(Tracking):
                 self.final_res[0:6]=[res_mean[0],res_mean[1],res_mean[2],res_mean[3],res_mean[4],res_mean[5]]
             self.final_res[6:10]=[cur_code_phase,cur_code_freq,cur_carrier_phase,cur_carrier_freq]
             self.final_res[10]=CN0_VSM
-            self.final_res[12]=SNR
+            self.final_res[13]=SNR
 
             self.res_buffer.put(self.final_res.copy())
         

@@ -1,0 +1,59 @@
+Date : 2022-05-18 14:36:24
+Directory : c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python
+Total : 26 files,  625 codes, 109 comments, 187 blanks, all 921 lines
+
+Languages
++----------+------------+------------+------------+------------+------------+
+| language | files      | code       | comment    | blank      | total      |
++----------+------------+------------+------------+------------+------------+
+| Python   |         23 |        602 |        109 |        163 |        874 |
+| Markdown |          3 |         23 |          0 |         24 |         47 |
++----------+------------+------------+------------+------------+------------+
+
+Directories
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                  | files      | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                     |         26 |        625 |        109 |        187 |        921 |
+| channel                                                                                               |         20 |        491 |         78 |        135 |        704 |
+| channel\tracking                                                                                      |         18 |        480 |         78 |        123 |        681 |
+| channel\tracking\discriminator                                                                        |          4 |         31 |         10 |          8 |         49 |
+| channel\tracking\lockdetector                                                                         |          3 |         33 |          0 |          7 |         40 |
+| channel\tracking\loopfilter                                                                           |          4 |         44 |          7 |         11 |         62 |
+| channel\tracking\synchronizer                                                                         |          3 |         90 |          9 |         21 |        120 |
+| public                                                                                                |          2 |         27 |         22 |         25 |         74 |
+| source_processor                                                                                      |          1 |         41 |          7 |          7 |         55 |
++-------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| filename                                                                                              | language | code       | comment    | blank      | total      |
++-------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\README.md                                              | Markdown |          1 |          0 |          1 |          2 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\channel\__init__.py                                    | Python   |          0 |          0 |          1 |          1 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\channel\readme.md                                      | Markdown |         11 |          0 |         11 |         22 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\channel\tracking\__init__.py                           | Python   |          0 |          0 |          1 |          1 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\channel\tracking\discriminator\__init__.py             | Python   |          0 |          0 |          1 |          1 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\channel\tracking\discriminator\discriminator.py        | Python   |          7 |          3 |          2 |         12 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\channel\tracking\discriminator\pll_arctan_dll_EMLA.py  | Python   |         12 |          5 |          3 |         20 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\channel\tracking\discriminator\simple_discriminator.py | Python   |         12 |          2 |          2 |         16 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\channel\tracking\lockdetector\VSM.py                   | Python   |         28 |          0 |          4 |         32 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\channel\tracking\lockdetector\__init__.py              | Python   |          0 |          0 |          1 |          1 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\channel\tracking\lockdetector\lock_detector.py         | Python   |          5 |          0 |          2 |          7 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\channel\tracking\loopfilter\__init__.py                | Python   |          0 |          0 |          1 |          1 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\channel\tracking\loopfilter\euler_order2_direct.py     | Python   |         31 |          7 |          5 |         43 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\channel\tracking\loopfilter\loop_filter.py             | Python   |          5 |          0 |          2 |          7 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\channel\tracking\loopfilter\simple_loopfilter.py       | Python   |          8 |          0 |          3 |         11 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\channel\tracking\readme.md                             | Markdown |         11 |          0 |         12 |         23 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\channel\tracking\synchronizer\__init__.py              | Python   |          0 |          0 |          1 |          1 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\channel\tracking\synchronizer\direct_synchronizer.py   | Python   |         53 |          5 |         14 |         72 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\channel\tracking\synchronizer\synchronizer.py          | Python   |         37 |          4 |          6 |         47 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\channel\tracking\track.py                              | Python   |        242 |         51 |         61 |        354 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\channel\tracking\track_thread.py                       | Python   |         29 |          1 |          2 |         32 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\generate_sim_signal.py                                 | Python   |         41 |          2 |         15 |         58 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\main.py                                                | Python   |         24 |          0 |          4 |         28 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\public\__init__.py                                     | Python   |          0 |          0 |          1 |          1 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\public\cal_CA_code.py                                  | Python   |         27 |         22 |         24 |         73 |
+| c:\Users\admin\Desktop\GNSS-SDR-Toolkit-python\source_processor\file_source_processor.py              | Python   |         41 |          7 |          7 |         55 |
+| Total                                                                                                 |          |        625 |        109 |        187 |        921 |
++-------------------------------------------------------------------------------------------------------+----------+------------+------------+------------+------------+

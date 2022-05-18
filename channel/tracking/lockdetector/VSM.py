@@ -3,7 +3,7 @@ from .lock_detector import LockDetector
 class VSMDetector(LockDetector):
     def __init__(self,amount,accu) -> None:
         super().__init__()
-        self.accu_time=accu     #the accumulation time
+        self.accu_time=accu     #the accumulation time, in seconds
         self.K=amount           #the amount of samples
         self.CN0=0              #CN0
         self.meanZ=0            #mean of z
