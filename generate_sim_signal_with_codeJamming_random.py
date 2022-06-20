@@ -47,24 +47,46 @@ def generate_sim_sig(filename,
             
         databit_stream=databit_stream.flatten()
         
+        #jamming and authentic signal's carrier phase
         t=np.linspace(0,1,int(sample_rate),False)
         cur_jamming_phase=t*2*pi*jamming_carrier
         cur_carrier_phase=t*2*pi*carrier_freq
         cur_carrier_phase=cur_carrier_phase%(2*pi)
         cur_jamming_phase=cur_jamming_phase%(2*pi)
 
+        #jamming and authentic signal's code phase
         cur_code_phase=t*code_frequency
         cur_code_phase=cur_code_phase%1023
         cur_chip_index=np.floor(cur_code_phase).astype('i4')
-        cur_jamming_chip_index=cur_chip_index.copy()
+        #calculate jamming code index
+        cur_jamming_chip_index=t*code_frequency
+        cur_jamming_chip_index=cur_jamming_chip_index%code_frequency
+        cur_jamming_chip_index=np.floor(cur_jamming_chip_index).astype('i4')
+
+        #authentic signal code sequence
         cur_code=code[cur_chip_index]
+
+        # calculate jamming code
+        jamming_code=np.random.rand(1023000)*2-1
+        jamming_code[jamming_code>=0]=1
+        jamming_code[jamming_code<0]=-1
         cur_jamming_code=jamming_code[cur_jamming_chip_index]
+
+        #authentic signal's carrier
         cur_sig=np.exp(1j*cur_carrier_phase)
+        #authentic signal
         cur_sig=cur_sig*cur_code*databit_stream
+
+        #jamming signal's carrier
         cur_jamming_sig=np.exp(1j*cur_jamming_phase)
+        #jamming signal
         cur_jamming_sig=cur_jamming_sig*cur_jamming_code*jamming_A
+
+        #noise
         noise_real=np.random.normal(0,0.01,len(cur_sig))
         noise_imag=np.random.normal(0,0.01,len(cur_sig))
+
+        #final sig
         cur_sig=cur_sig+noise_real+1j*noise_imag+cur_jamming_sig
         cur_sig=cur_sig.astype('c8')
             
@@ -75,9 +97,13 @@ def generate_sim_sig(filename,
 
 
 # # simple generate
-# filename="../data/sim_40dB_3000Hz.dat"
-# generate_sim_sig(filename,10,2,34,1e6,3000,0,6e6,40)
+# filename="../data/sim_rand_10dB_0Hz.dat"
+# generate_sim_sig(filename,10,2,34,1e6,0,0,6e6,10)
 
-for freq_shift in range(1080,1081,1):
-    filename="e:/data/sig_codejam_40dB_0bitshift_"+str(freq_shift)+"freqshift_perHz.dat"
+for freq_shift in range(0,1000,20):
+    filename="e:/data/sig_codejam_40dB_0bitshift_"+str(freq_shift)+"freqshift_rand.dat"
     generate_sim_sig(filename,5,2,34,1e6,freq_shift,0,6e6,40)
+
+# for power_gain in range(-20,60,1):
+#     filename="../data/sig_codejam_"+str(power_gain)+"dB_0bitshift_"+"0"+"freqshift.dat"
+#     generate_sim_sig(filename,5,2,34,1e6,0,0,6e6,power_gain)

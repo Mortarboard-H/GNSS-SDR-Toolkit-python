@@ -20,7 +20,7 @@ class TrackThread(Thread):
         self.__prn=prn
         #the size of initial state should be 4, including initial code phase& freq, carrier phase & freq
         assert len(init_state)==4, "Error! Length of initial state shoud be 4!"
-        self.__tracker=TrackPerMs(sample_rate,source_buffer,prn,code_len,init_state,res_buffer,ms_to_process,accu_time_ms)
+        self.__tracker=TrackPerMs_NoBit_FiltOrder(sample_rate,source_buffer,prn,code_len,init_state,res_buffer,ms_to_process,accu_time_ms)
 
     def set_init_state(self,init_state):
         assert len(init_state)==4, "Error! Length of initial state shoud be 4!"

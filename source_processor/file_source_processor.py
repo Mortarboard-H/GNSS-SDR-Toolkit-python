@@ -38,18 +38,21 @@ class FileSourceProcessor:
 
 # A subclass of threading.Thread. This class makes the file source processor a thread 
 class FileSourceThread (threading.Thread):
-    def __init__(self, threadID, name, filename,datatype,buffer):
+    def __init__(self, threadID, name, filename,datatype,buffer,amount=10e3):
         threading.Thread.__init__(self)
         self.threadID = threadID
         self.name = name
         self.filename=filename
         self.__file_processor=FileSourceProcessor(self.filename,datatype,buffer)
+        self.amount=amount
     def run(self):
         print ("开始线程：" + self.name)
         is_enouth=True
-        while(is_enouth):
+        totalread=0
+        while(is_enouth and totalread<self.amount):
             #read in data, and confine the maximun number of samples to be read in
             [data,is_enouth]=self.__file_processor.read_data(100)
+            totalread=totalread+100
             #push the data into a buffer
             self.__file_processor.push_to_buffer(data)
         print ("退出线程：" + self.name)

@@ -47,7 +47,7 @@ class DirectSynchronizer(Synchronizer):
         self.cur_code_phase=self.__init_code_phase
         self.cur_carrier_phase=self.__init_carrier_phase
         chip_per_sample=self.__init_code_frequency/self.__sample_rate
-        carr_phase_per_sample=self.__init_carrier_frequency*pi/self.__sample_rate
+        carr_phase_per_sample=self.__init_carrier_frequency*2*pi/self.__sample_rate
 
         total_time=len(data)/self.__sample_rate
         t=np.linspace(0,total_time,len(data),False)

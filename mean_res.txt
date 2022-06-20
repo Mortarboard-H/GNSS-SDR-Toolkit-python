@@ -1,0 +1,1 @@
+accutime_ms,  mean_CN0,  mean_SNR
